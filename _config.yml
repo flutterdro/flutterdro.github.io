@@ -16,7 +16,7 @@ timezone:
 
 title: flutterdro's dev blog # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the sub-title
+tagline: Small hobby dev enjoys coding # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Blog about whatever interests me at the moment.
