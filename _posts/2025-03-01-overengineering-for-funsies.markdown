@@ -7,7 +7,7 @@ tags: [c++, expression templates, template metaprogramming]
 
 Have you ever encountered a problem which can be done manually in 10 mins,
 but when you sit down to do it, you suddenly feel something is amiss?
-And 10 min job suddenly turns into an hour of beautiful agony and 5 mins of
+And 10 min job suddenly turns into an hour of agony and 5 mins of
 actually getting the work done.
 After that you have the urge to design a generic solution which will turn that
 10 min job into an instant one.
