@@ -2,54 +2,66 @@
 layout: post
 categories: [Compiler Development]
 tags: [compiler, C++]
-title: "How do I write a compiler? Part 2: Parsing"
+title: "I decided to waste my time"
 ---
-Like genuinely. How do you do this? Once again this is not an educational post.
-This is an attempt to figure shit out. This is like an exploration diary.
-The one you find on a cadaver in the middle of the jungle, whose previous owner
-probably died from snakes and spiders crawling up his ass and eating him from the
-inside.
+Its been quite a while, eh? I decided to make this blog
+more of an actual dev blog. So instead of posting only
+when I come up with something cool or abhorent, I will post
+more regular thoughts.
 
-## Interlude: Where is Part 1?
+## What I've been up to?
 
-Part 1 is about lexing but it is piss easy so I skipped it.
-Dunno. Maybe I will write about it someday.
+tldr; I've ditched emulators for a while to write a compiler.
+Moreover I want to do everything from frontend to backend on my own.
+No bison/flex, no llvm. Not because I dislike the tools but just
+for the bragging rights. You know I am a c++ programmer, right? I would
+sacrifice my firstborn if it gave me one more thing to be a snob about.
 
-## Prologue
+But in reality, I think it will make for a better learning experience.
+Since I was kicked out of the uni like a pathetic failure I am, I have to
+grasp at straws.
 
-Technically I could pull up bison and simplify the proccess of writing
-a parser, but that's not it. When I last used bison, what it provided
-diverged quite a lot from my vision. And what is my vision?
+Turns out it was a very presumptious idea. And I already spent nearly a year
+on the frontend alone.
 
-Well, let's talk about
+Turns out that designing a compiler to be actually useful is hard,
+even for a dirt simple language like pascal.
+Who would have thought?
 
-### What makes a good compiler?
+While my fight against the design of the compiler reached an
+impasse, I decided to write a post, where I try to convince myself
+that my design makes sense. Soooooo.
 
-It is a deep question because different people will say different things.
+## AST design
 
-For example tooling developers would ask for heavily customixable compiler,
-the one which provides a lot of flags, allows to dump different representations,
-provides time-traces etc.
+At the core of my ast design is one class
 
-From the pov of the user the most important things are efficiency of the produced
-binary, speed of compilation and quality of the error reporting and warnings.
+```cpp
+template<typename AstElementT>
+class handle {
+    //some methods
+private:
+    std::unique_ptr<AstElementT> m_data;
+}
+```
+Well, duh. Of course it is. AST is a tree structure. And you need
+handle-like thing whether it is a simple pointer or some abstraction
+above pointer like `unique_ptr`.
 
-Actually good compilers will provide all of that and a little more.
+But my handle is _special_. Not good kind of special. But the kind
+I am.
 
-### My priorities
+### _Special_
 
-Obviously, I am a dogshit programmer, like, bottom of the barrel. No,
-I am the mold bellow the bottom of the barrel. So I can't write
-something actually good.
+There are 2 things that seperates my `handle` from a
+regular pointer-y thing.
 
-Buuuuut, I can try and focus on one specific aspect. And I chose error
-reporting. What else did you expect from the c++ programmer? Those cryptic
-walls of error messages are killing me. Most of it is my fault for writing
-unreadable garbage, still some of it definitelly is not my fault.
+First, invalid state is called poisoned and is constructed from
+the `poison_pill`. Not much of a difference to be honest,
+potato potato.
 
-I guess this is kind of spiritual rite to calm down my soul.
-
-##
+Second, it is not dereferenceable. You can't access underlying data
+not via `operator*()` nor via some kind of `get()` function.
 
 
 
